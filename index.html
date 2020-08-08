@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LR</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.616;
+        margin: 0;
+        min-height: 100vh;
+        min-width: 100vw;
+        padding: 0;
+      }
+      .container {
+        align-items: center;
+        background-color: #fff;
+        color: #3f3f3f;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+      }
+      h1 {
+        font-size: 3em;
+        letter-spacing: 1.25em;
+        margin-top: 0;
+        text-transform: uppercase;
+        padding-left: 1.25em;
+        filter:  url(#filter);
+      }
+      h1:hover {
+        /* filter:  url(#filter); */
+      }
+      svg {
+        opacity: 0;
+        position: absolute;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <svg>
+      <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="13" dy="10" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel"/>
+        <feDropShadow stdDeviation="0 0" in="redChannel" dx="-5" dy="4" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel"/>
+      </filter>
+    </svg>
+    <div class="container">
+      <h1>Zapo</h1>
+    </div>
+    <!--
+      Sources
+      - https://yoksel.github.io/svg-filters/#/
+      - https://viewbox.club/tips/02.CSS_Filters.html
+    -->
+  </body>
+</html>
