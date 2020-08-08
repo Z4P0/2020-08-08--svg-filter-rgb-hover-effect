@@ -29,9 +29,6 @@
         padding-left: 1.25em;
         filter:  url(#filter);
       }
-      h1:hover {
-        /* filter:  url(#filter); */
-      }
       svg {
         opacity: 0;
         position: absolute;
@@ -47,7 +44,7 @@
         <feDropShadow stdDeviation="0 0" in="redChannel" dx="-5" dy="4" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel"/>
       </filter>
       <!-- v2 - animate offset on hover -->
-      <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <filter id="filter-v2" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
         <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="0" dy="0" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel">
           <animate attributeName="dx" values="0;13" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
           <animate attributeName="dy" values="0;10" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
@@ -57,7 +54,21 @@
           <animate attributeName="dy" values="0;4" dur="600ms" begin="zapo.mouseenter" fill="freeze"/>
         </feDropShadow>
       </filter>
-
+      <!-- v3 - animate offset on hover -->
+      <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="0" dy="0" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel">
+          <animate attributeName="dx" values="0;13" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dy" values="0;10" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dx" values="13;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
+          <animate attributeName="dy" values="10;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
+        </feDropShadow>
+        <feDropShadow stdDeviation="0 0" in="redChannel" dx="0" dy="0" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel">
+          <animate attributeName="dx" values="0;-5" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dy" values="0;4" dur="600ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dx" values="-5;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
+          <animate attributeName="dy" values="4;0" dur="600ms" begin="zapo.mouseleave" fill="freeze"/>
+        </feDropShadow>
+      </filter>
     </svg>
     <div class="container">
       <h1 id="zapo">Zapo</h1>
