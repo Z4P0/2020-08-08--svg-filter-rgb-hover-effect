@@ -41,18 +41,33 @@
   </head>
   <body>
     <svg>
-      <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <!-- v1 - the offset -->
+      <filter id="filter-v1" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
         <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="13" dy="10" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel"/>
         <feDropShadow stdDeviation="0 0" in="redChannel" dx="-5" dy="4" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel"/>
       </filter>
+      <!-- v2 - animate offset on hover -->
+      <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+        <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="0" dy="0" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel">
+          <animate attributeName="dx" values="0;13" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dy" values="0;10" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+        </feDropShadow>
+        <feDropShadow stdDeviation="0 0" in="redChannel" dx="0" dy="0" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel">
+          <animate attributeName="dx" values="0;-5" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
+          <animate attributeName="dy" values="0;4" dur="600ms" begin="zapo.mouseenter" fill="freeze"/>
+        </feDropShadow>
+      </filter>
+
     </svg>
     <div class="container">
-      <h1>Zapo</h1>
+      <h1 id="zapo">Zapo</h1>
     </div>
     <!--
       Sources
       - https://yoksel.github.io/svg-filters/#/
       - https://viewbox.club/tips/02.CSS_Filters.html
+      https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dx
+      https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
     -->
   </body>
 </html>
