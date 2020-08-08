@@ -56,13 +56,13 @@
       </filter>
       <!-- v3 - animate offset on hover -->
       <filter id="filter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
-        <feDropShadow stdDeviation="0 0" in="SourceGraphic" dx="0" dy="0" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel">
+        <feDropShadow id="redOffset" stdDeviation="0 0" in="SourceGraphic" dx="0" dy="0" flood-color="#ff2600" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="redChannel">
           <animate attributeName="dx" values="0;13" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
           <animate attributeName="dy" values="0;10" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
           <animate attributeName="dx" values="13;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
           <animate attributeName="dy" values="10;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
         </feDropShadow>
-        <feDropShadow stdDeviation="0 0" in="redChannel" dx="0" dy="0" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel">
+        <feDropShadow id="blueOffset" stdDeviation="0 0" in="redChannel" dx="0" dy="0" flood-color="#0432ff" flood-opacity="0.3" x="0%" y="0%" width="100%" height="100%" result="blueChannel">
           <animate attributeName="dx" values="0;-5" dur="200ms" begin="zapo.mouseenter" fill="freeze"/>
           <animate attributeName="dy" values="0;4" dur="600ms" begin="zapo.mouseenter" fill="freeze"/>
           <animate attributeName="dx" values="-5;0" dur="200ms" begin="zapo.mouseleave" fill="freeze"/>
@@ -73,6 +73,44 @@
     <div class="container">
       <h1 id="zapo">Zapo</h1>
     </div>
+    <script>
+      let redOffset = document.querySelector('#redOffset');
+      let blueOffset = document.querySelector('#blueOffset');
+
+      document.querySelector('#zapo').addEventListener('mouseleave', function() {
+        setTimeout(updateDXdYvalues, 250);
+      });
+
+      function updateDXdYvalues() {
+        // console.log('change dx, dy values');
+        // change red offset
+        let newOffset;
+
+        // get new red dx
+        newOffset = randomValue();
+        redOffset.querySelector('[attributeName="dx"][begin="zapo.mouseenter"]').setAttribute('values', `0; ${newOffset}`);
+        redOffset.querySelector('[attributeName="dx"][begin="zapo.mouseleave"]').setAttribute('values', `${newOffset}; 0`);
+        // get new red dy
+        newOffset = randomValue();
+        redOffset.querySelector('[attributeName="dy"][begin="zapo.mouseenter"]').setAttribute('values', `0; ${newOffset}`);
+        redOffset.querySelector('[attributeName="dy"][begin="zapo.mouseleave"]').setAttribute('values', `${newOffset}; 0`);
+
+        // get new blue dx
+        newOffset = randomValue();
+        blueOffset.querySelector('[attributeName="dx"][begin="zapo.mouseenter"]').setAttribute('values', `0; ${newOffset}`);
+        blueOffset.querySelector('[attributeName="dx"][begin="zapo.mouseleave"]').setAttribute('values', `${newOffset}; 0`);
+        // get new blue dy
+        newOffset = randomValue();
+        blueOffset.querySelector('[attributeName="dy"][begin="zapo.mouseenter"]').setAttribute('values', `0; ${newOffset}`);
+        blueOffset.querySelector('[attributeName="dy"][begin="zapo.mouseleave"]').setAttribute('values', `${newOffset}; 0`);
+
+      }
+
+      function randomValue() {
+        // from -5 to 13
+        return Math.floor((Math.random()*20) - (Math.random() * 20));
+      }
+    </script>
     <!--
       Sources
       - https://yoksel.github.io/svg-filters/#/
